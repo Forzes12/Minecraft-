@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Официальный сайт Minecraft сервера с лучшими модами, новостями и комьюнити">
+    <title>Minecraft</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+    <style>
+        :root {
+            --color-bg: #1d1d21;
+            --color-primary: #3b8526;
+            --color-secondary: #1e6cab;
+            --color-accent: #aa0000;
+            --color-text-light: #f0f0f0;
+            --color-text-dark: #1d1d21;
+            --color-border: #0c0c0e;
+            --color-card: #2a2a2e;
+            --container-width: 1200px;
+            --border-radius: 4px;
+            --transition-speed: 0.3s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background-color: var(--color-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            text-shadow: 2px 2px 0 var(--color-border);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--color-secondary);
+            text-shadow: 1px 1px 0 var(--color-border);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--color-secondary);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        
+        a:hover {
+            color: var(--color-primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: center;
+            text-shadow: 1px 1px 0 var(--color-border);
+        }
+        
+        .btn:hover {
+            background-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--color-secondary);
+        }
+        
+        .btn-accent {
+            background-color: var(--color-accent);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background-color: var(--color-primary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .card {
+            background-color: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        header {
+            background-color: rgba(29, 29, 33, 0.95);
+            border-bottom: 2px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Courier New', monospace;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            text-shadow: 2px 2px 0 var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+        }
+        
+        .mode-switcher {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .mode-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .mode-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+        
+        .mode-btn:hover:not(.active) {
+            background-color: var(--color-secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+        
+        nav li {
+            position: relative;
+        }
+        
+        nav a {
+            display: inline-block;
+            color: var(--color-text-light);
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            transition: all var(--transition-speed);
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color-border);
+            background-color: var(--color-card);
+        }
+        
+        nav a:hover {
+            background-color: var(--color-card);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 133, 38, 0.3);
+        }
+        
+        nav a.active {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+            border-color: var(--color-primary);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--color-text-light);
+            border-radius: 2px;
+            transition: all var(--transition-speed);
+        }
+        
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(29, 29, 33, 0.8), rgba(29, 29, 33, 0.9)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(12, 12, 14, 0.7);
+            border-radius: var(--border-radius);
+            border: 2px solid var(--color-border);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .mods-section {
+            background-color: rgba(12, 12, 14, 0.5);
+            padding: 3rem 0;
+        }
+        
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+            padding: 1.5rem 0;
+            background-color: var(--color-card);
+            border-top: 2px solid var(--color-border);
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        .marquee {
+            display: flex;
+            animation: marqueeScroll 30s linear infinite;
+            width: max-content;
+        }
+        
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+        
+        .mod-item {
+            flex: 0 0 auto;
+            width: 200px;
+            margin: 0 1rem;
+            background-color: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+        
+        .mod-item:hover {
+            transform: scale(1.05);
+            border-color: var(--color-primary);
+        }
+        
+        .mod-avatar {
+            width: 64px;
+            height: 64px;
+            background-color: var(--color-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .mod-name {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-light);
+        }
+        
+        .mod-version {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            background-color: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-speed);
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            color: var(--color-text-light);
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        footer {
+            background-color: var(--color-border);
+            padding: 3rem 0 1.5rem;
+            border-top: 2px solid var(--color-primary);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(240, 240, 240, 0.1);
+            font-size: 0.9rem;
+            color: rgba(240, 240, 240, 0.7);
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: var(--color-card);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: color var(--transition-speed);
+        }
+        
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 767px) {
+            :root {
+                --container-width: 100%;
+                --border-radius: 2px;
+            }
+            
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            section { padding: 2rem 0; }
+            
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                border-bottom: 2px solid var(--color-border);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--transition-speed);
+                z-index: 99;
+            }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+            
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+            
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1199px) {
+            :root {
+                --container-width: 95%;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">⛏️</span>
+                <span>Minecraft</span>
+            </a>
+            
+            <div class="mode-switcher">
+                <button id="pc-mode-btn" class="mode-btn active" aria-label="PC-режим">🖥️ PC-режим</button>
+                <button id="mobile-mode-btn" class="mode-btn" aria-label="Мобильный-режим">📱 Мобильный-режим</button>
+            </div>
+            
+            <nav>
+                <div class="hamburger" id="hamburger" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#mods">Моды</a></li>
+                    <li><a href="#about">О сервере</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Добро пожаловать на сайт Minecraft mods</h1>
+            <p>Данный сайт был создан одним разработчиком Forzes на сайте есть моды, шейдеры, текстур паки, и многое другое мы уверены что вы найдете для себя что-то нужное!</p>
+            <a href="#mods" class="btn">Смотреть моды</a>
+            <a href="#contact" class="btn btn-secondary">Присоединиться</a>
+        </div>
+    </section>
+
+    <section id="mods" class="mods-section">
+        <div class="container">
+            <h2 class="section-title">Популярные моды</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Более 100+ модов на любой вкус. Наведите курсор, чтобы приостановить прокрутку</p>
+            
+            <div class="marquee-container">
+                <div class="marquee" id="marquee"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Нажмите на любой мод, чтобы увидеть подробную информацию</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" style="background-color: rgba(12, 12, 14, 0.3);">
+        <div class="container">
+            <h2 class="section-title">О нашем сервере</h2>
+            
+            <div class="about-content">
+                <div class="card">
+                    <h3>🚀 Высокая производительность</h3>
+                    <p>Наш сервер работает на мощном оборудовании с минимальной задержкой. Мы гарантируем стабильный FPS даже при большом количестве игроков и модов.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🛡️ Защита и безопасность</h3>
+                    <p>Система защиты от гриферов, регулярные бэкапы и активная модерация обеспечивают безопасную и комфортную игру для всех участников.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>🎮 Уникальный геймплей</h3>
+                    <p>Специально сбалансированный набор модов, уникальные ивенты, экономика и система квестов делают игру по-настоящему увлекательной.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 Активное комьюнити</h3>
+                    <p>Присоединяйся к нашему дружному сообществу. Регулярные конкурсы, совместные постройки и помощь новичкам - это про нас!</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <h3>Технические требования</h3>
+                <div class="card" style="max-width: 800px; margin: 0 auto;">
+                    <ul style="list-style-position: inside; text-align: left;">
+                        <li>Minecraft Java Edition 1.16.5 - 1.20.x</li>
+                        <li>Не менее 4 ГБ оперативной памяти, выделенной для Minecraft</li>
+                        <li>Видеокарта с поддержкой OpenGL 3.2</li>
+                        <li>Стабильное интернет-соединение (от 10 Мбит/с)</li>
+                        <li>Для некоторых модов требуется установка Forge или Fabric</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title">Галерея сервера</h2>
+            
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #3b8526;">🌳</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #1e6cab;">🏰</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #aa0000;">🔥</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #8a2be2;">⛏️</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #ff8c00;">🏔️</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img" style="background-color: #2afcff;">🌌</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <p>Скриншоты построек наших игроков</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: rgba(12, 12, 14, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Присоединяйся к нам</h2>
+            
+            <div class="contact-form">
+                <div class="card">
+                    <h3>Форма обратной связи</h3>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email для связи</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Отправить</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3>Мы в социальных сетях</h3>
+                <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                    <a href="#" class="btn" style="background-color: #7289DA;">Discord</a>
+                    <a href="#" class="btn" style="background-color: #1DA1F2;">Twitter</a>
+                    <a href="#" class="btn" style="background-color: #FF0000;">YouTube</a>
+                    <a href="#" class="btn" style="background-color: #1877F2;">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Minecraft Forzes</h3>
+                    <p>Лучший сервер с модами для Minecraft. Присоединяйся к нашему сообществу и погрузись в удивительный мир возможностей!</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#mods">Моды</a></li>
+                        <li><a href="#about">О сервере</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-info">
+                    <h3>Информация</h3>
+                    <p>Версия сайта: 2.0.1</p>
+                    <p>Последнее обновление: 2023</p>
+                    <p>Minecraft является товарным знаком Mojang Studios</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Minecraft Forzes. Все права защищены. Этот сайт не аффилирован с Mojang Studios.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="mod-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close" aria-label="Закрыть">✕</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const modsData = [
+            { id: 1, name: "OptiFine", version: "1.20.1", description: "Оптимизация графики и производительности", icon: "⚡", downloads: "10M+" },
+            { id: 2, name: "JourneyMap", version: "1.19.2", description: "Карта мира в реальном времени", icon: "🗺️", downloads: "8.5M+" },
+            { id: 3, name: "JEI", version: "1.20.1", description: "Просмотр рецептов крафта", icon: "📜", downloads: "12M+" },
+            { id: 4, name: "Biomes O' Plenty", version: "1.19.2", description: "Добавляет 80+ новых биомов", icon: "🌿", downloads: "5.2M+" },
+            { id: 5, name: "Tinkers' Construct", version: "1.18.2", description: "Расширенная система инструментов", icon: "⚒️", downloads: "7.8M+" },
+            { id: 6, name: "Applied Energistics 2", version: "1.20.1", description: "Система автоматизации и хранения", icon: "💾", downloads: "4.3M+" },
+            { id: 7, name: "Thaumcraft", version: "1.12.2", description: "Магия и алхимия", icon: "🔮", downloads: "6.1M+" },
+            { id: 8, name: "Twilight Forest", version: "1.19.2", description: "Новое измерение с приключениями", icon: "🌳", downloads: "3.9M+" },
+            { id: 9, name: "Create", version: "1.20.1", description: "Инженерия и механизмы", icon: "⚙️", downloads: "9.2M+" },
+            { id: 10, name: "Ice and Fire", version: "1.19.2", description: "Драконы и мифические существа", icon: "🐉", downloads: "2.8M+" }
+        ];
+        
+        const modal = document.getElementById('mod-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalClose = document.getElementById('modal-close');
+        
+        function initMarquee() {
+            const marquee = document.getElementById('marquee');
+            if (!marquee) return;
+            
+            marquee.innerHTML = '';
+            
+            for (let i = 0; i < 2; i++) {
+                modsData.forEach(mod => {
+                    const modItem = document.createElement('div');
+                    modItem.className = 'mod-item';
+                    modItem.setAttribute('data-mod-id', mod.id);
+                    modItem.setAttribute('tabindex', '0');
+                    modItem.setAttribute('role', 'button');
+                    modItem.setAttribute('aria-label', `Мод ${mod.name}, версия ${mod.version}`);
+                    
+                    modItem.innerHTML = `
+                        <div class="mod-avatar">${mod.icon}</div>
+                        <div class="mod-name">${mod.name}</div>
+                        <div class="mod-version">Версия: ${mod.version}</div>
+                    `;
+                    
+                    modItem.addEventListener('click', () => openModModal(mod.id));
+                    modItem.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openModModal(mod.id);
+                        }
+                    });
+                    
+                    marquee.appendChild(modItem);
+                });
+            }
+        }
+        
+        function openModModal(modId) {
+            const mod = modsData.find(m => m.id === modId);
+            if (!mod) return;
+            
+            modalContent.innerHTML = `
+                <h2>${mod.name}</h2>
+                <p><strong>Версия:</strong> ${mod.version}</p>
+                <p><strong>Описание:</strong> ${mod.description}</p>
+                <p><strong>Скачиваний:</strong> ${mod.downloads}</p>
+                <p><strong>Совместимость:</strong> Minecraft ${mod.version.split('.')[0]}.x</p>
+                <div class="modal-buttons">
+                    <a href="#" class="btn" onclick="alert('Ссылка на скачивание мода ${mod.name}')">Скачать мод</a>
+                    <button class="btn btn-accent" onclick="closeModal()">Закрыть</button>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+        
+        modalClose.addEventListener('click', closeModal);
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        function initMobileNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                document.querySelectorAll('#nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        }
+        
+        function initContactForm() {
+            const contactForm = document.getElementById('contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    
+                    alert(`Спасибо, ${name}! Ваше сообщение отправлено. Мы свяжемся с вами по email: ${email}`);
+                    
+                    contactForm.reset();
+                });
+            }
+        }
+        
+        function initGallery() {
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    alert('В реальном приложении здесь открывался бы Lightbox с изображением');
+                });
+            });
+        }
+        
+        function initModeSwitcher() {
+            const pcModeBtn = document.getElementById('pc-mode-btn');
+            const mobileModeBtn = document.getElementById('mobile-mode-btn');
+            
+            if (pcModeBtn && mobileModeBtn) {
+                const currentMode = localStorage.getItem('mc-site-mode') || 'pc';
+                
+                function setMode(mode) {
+                    document.body.classList.remove('pc-mode', 'mobile-mode');
+                    document.body.classList.add(mode + '-mode');
+                    pcModeBtn.classList.toggle('active', mode === 'pc');
+                    mobileModeBtn.classList.toggle('active', mode === 'mobile');
+                }
+                
+                setMode(currentMode);
+                
+                pcModeBtn.addEventListener('click', () => {
+                    if (currentMode !== 'pc') {
+                        localStorage.setItem('mc-site-mode', 'pc');
+                        setMode('pc');
+                    }
+                });
+                
+                mobileModeBtn.addEventListener('click', () => {
+                    if (currentMode !== 'mobile') {
+                        localStorage.setItem('mc-site-mode', 'mobile');
+                        setMode('mobile');
+                    }
+                });
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initMarquee();
+            initModal();
+            initMobileNavigation();
+            initContactForm();
+            initGallery();
+            initModeSwitcher();
+        });
+    </script>
+</body>
+</html>
